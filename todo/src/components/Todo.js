@@ -1,8 +1,15 @@
+    
 import React from "react"
 
 const Todo = props => {
-  console.log(props)
-  return <p>{props.text}</p>
+  return (
+    <div>
+      <div onClick={() => props.toggleTask(props.task.id)}>
+        {props.task.text}
+      </div>
+      <button onClick={() => props.deleteTask(props.task.id)}>Delete</button>
+    </div>
+  )
 }
 
 export default Todo

@@ -1,24 +1,39 @@
-import React from "react"
+import React, { Component } from "react"
 import Todo from "./Todo"
 
 import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { toggleTask, deleteTask } from "../Redux"
 
-const TodoList = props => {
-  return (
-    <div>
-      <div className="todo-list">
-        {props.todos.map(todo => (
-          <Todo key={todo.id} id={todo.id} text={todo.text} />
+export class TodoList extends Component {
+  render() {
+    const tasks = this.props.tasks || []
+    return (
+      <div>
+        {tasks.map(task => (
+          <Todo
+            key={task.id}
+            task={task}
+            toggleTask={this.props.toggleTask}
+            deleteTask={this.props.deleteTask}
+          />
         ))}
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    tasks: state.tasks
   }
 }
 
-export default connect(mapStateToProps)(TodoList)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleTask, deleteTask }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList)

@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react"
+import "./App.css"
 
-import './App.css';
+import TodoList from "./components/TodoList"
+import TodoForm from "./components/TodoForm"
 
-function App() {
+const App = () => {
   return (
-    <div></div>
-  );
+    <div className="App">
+      <TodoForm />
+      <TodoList />
+    </div>
+  )
 }
 
-export default App;
+export default App
